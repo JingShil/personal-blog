@@ -1,0 +1,41 @@
+.head-body{
+	width: 1000px;
+	height: 80px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	color: aliceblue;
+}
+
+.head-title{
+	height: 80px;
+	width: fit-content;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.head-title-avatar{
+	height: 40px;
+	border-radius: 20px;
+}
+
+.head-title-text{
+	font-size: 25px;
+	margin-left: 5px;
+}
+
+.head-menu{
+	display: flex;
+	flex-direction: row;
+	margin-left: 5px;
+}
+
+.head-menu-item{
+	margin-left: 15px;
+}
+
+.head-search{
+	margin-left: 40px;
+}

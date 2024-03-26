@@ -1,0 +1,74 @@
+.controller-body{
+	width: 1000px;
+	height: 96%;
+	background-color: rgb(250, 247, 244);
+	display: flex;
+	flex-direction: row;
+	border-radius: 10px;
+}
+
+.controller-menu{
+	width: 200px;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	border-right:1px solid black;
+	align-items: center;
+}
+
+.controller-menu-item{
+	width: 100%;
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	transition: 0.5s;
+
+}
+
+.controller-menu-item:hover{
+	background-color: rgb(157, 206, 247);
+	color: aliceblue;
+
+}
+.controller-menu-select{
+	background-color: rgb(157, 206, 247);
+	color: aliceblue;
+	
+}
+
+.controller-menu-item img{
+	height: 25px;
+}
+
+.controller-main{
+	width: 800px;
+	display: flex;
+	flex-direction: column;
+}
+
+.controller-head{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	height: 90px;
+	border-bottom:1px solid black;
+}
+.controller-head-item{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.controller-head img{
+	height: 50px;
+}
+
+.controller-container{
+	width: 100%;
+	
+	
+}

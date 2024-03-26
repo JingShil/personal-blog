@@ -1,0 +1,174 @@
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  inset: 0;
+  background-image: url(../imgs/10.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  transition: 0.5s;
+}
+
+/* .login-body::before{
+	content: '';
+	position: absolute;
+	
+} */
+
+.login-container {
+  width: 1100px;
+  height: 600px;
+  /* background-color: antiquewhite; */
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(255, 255, 255);
+}
+
+.login-left {
+  width: 300px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login-right {
+  width: 400px;
+  height: 500px;
+  color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 254, 252); */
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  position: relative;
+  /* align-items: center; */
+  justify-content: center;
+  border: 1px solid rgb(72, 160, 241);
+  box-shadow: 0px 0px 10px 0px rgb(190, 153, 212);
+  border-radius: 10px;
+  position: relative;
+}
+
+.login-right-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  filter: blur(2px);
+  inset: 0;
+  background-image: url(../imgs/10.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  transition: 0.5s;
+}
+
+.login,
+.register {
+  position: absolute;
+  width: 400px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+  align-items: center;
+  /* height: 100%; */
+  transition: 1s;
+}
+
+:deep(.el-form-item__content) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+:deep(.el-input) {
+  width: 80%;
+}
+:deep(.el-input__wrapper) {
+  background-color: transparent;
+}
+:deep(.el-input__inner) {
+  color: rgb(255, 255, 255);
+}
+
+/* :deep(.el-input__inner:-webkit-autofill){
+	color: rgb(255, 255, 255);
+} */
+
+.login-form-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.login-form-line span {
+  cursor: pointer;
+  color: rgb(187, 212, 212);
+  z-index: 2;
+}
+.login-form-line span:hover {
+  color: rgb(91, 179, 252);
+  text-decoration: underline;
+}
+
+button {
+  height: 40px;
+  width: 200px;
+  border: none;
+  background-color: rgb(19, 154, 245);
+  border-radius: 10px;
+  cursor: pointer;
+  color: aliceblue;
+
+  transition: 0.5s;
+  animation: animate-button 0.5s forwards;
+}
+
+@keyframes animate-button {
+  0% {
+    transform: translateY(2px);
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+  100% {
+    transform: translateY(0px);
+    border: 10px;
+  }
+}
+
+@keyframes animate-button-hover {
+  0% {
+    transform: translateY(0px);
+    border: 10px;
+  }
+  100% {
+    transform: translateY(2px);
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}
+
+button:hover {
+  animation: animate-button-hover 0.5s forwards;
+  color: rgb(207, 243, 231);
+  background-color: rgb(19, 154, 245);
+  transition: 0.5s;
+  /* background-color: rgb(90, 164, 248); */
+}
+
+.toLeft {
+  transform: translateX(-400px);
+}
+
+.toRight {
+  transform: translateX(400px);
+}

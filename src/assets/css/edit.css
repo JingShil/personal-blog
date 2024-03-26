@@ -1,0 +1,214 @@
+.edit-body{
+	width: 95%;
+	height: 98%;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid black;
+	/* align-items: center;
+	align-items: c; */
+}
+
+.edit-head{
+	width: 100%;
+	height: 60px;
+	background-color: aliceblue;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	/* position: sticky;
+	top: 0;
+	z-index: 100; */
+	
+}
+.edit-title-input{
+	height: 40px;
+	width: 70%;
+	display: flex;
+	flex-direction: row;
+	position: relative;
+	align-items: center;
+
+}
+
+.edit-title-input input{
+	height: 40px;
+	width: 100%;
+	padding-left: 10px;
+	border-radius: 10px;
+}
+.edit-title-input span{
+	position: absolute;
+	right: 10px;
+}
+
+.edit-head button{
+	margin-left: 15px;
+	height: 45px;
+	width: 90px;
+	right: 10px;
+}
+
+
+.edit-container{
+	width: 100%;
+	/* height: fit-content; */
+	height: 100%;
+	background-color: aliceblue;
+	/* flex:1; */
+	
+	display: flex;
+	flex-direction: row;
+	text-align: left;
+	
+}
+
+.edit-left{
+	min-width: 80%;
+	height: 100%;
+	/* flex: 1; */
+	
+}
+
+.edit-content{
+	height: 600px;
+	
+	
+}
+
+
+:deep(.vditor-content){
+	/* height: 500px; */
+	overflow: auto;
+}
+
+:deep(.vditor-toolbar){
+	height: 50px;
+	/* position: sticky;
+	top: 50px;
+	z-index: 100; */
+}
+:deep(.vditor-reset){
+	overflow: auto;
+}
+
+.edit-right{
+	min-width: 20%;
+	height: 100%;
+	/* flex: 1; */
+	display: flex;
+	flex-direction: column;
+	border-top: 1px solid rgb(211, 215, 218);
+	/* background-color: antiquewhite; */
+	/* position: sticky;
+	top: 50px;
+	 */
+}
+
+.edit-help{
+	height: 50px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	background-color: aliceblue;
+	/* justify-content: space-around; */
+	
+}
+
+.edit-help-item{
+	width: 25%;
+	height: 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	/* margin-right: 20px; */
+}
+
+.edit-help-item img{
+	height: 20px;
+}
+
+.edit-help-item:hover{
+	cursor: pointer;
+	background-color: rgb(142, 187, 247);
+}
+
+.edit-help-content{
+	width: 100%;
+	flex: 1;
+	border-top: 1px solid rgb(183, 214, 238);
+	
+}
+
+.edit-help-content-item{
+	/* margin-top: 20px;
+	margin-left:20px; */
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.edit-help-content-head{
+	display: flex;
+	flex-direction: row;
+	height: 50px;
+	width: 100%;
+	border-bottom: 1px solid rgb(183, 214, 238);
+	align-items: center;
+	
+}
+.edit-help-content-head span{
+	margin-left: 10px;
+}
+.edit-help-catalog{
+	flex: 1;
+	margin-top: 10px;
+}
+.edit-help-catalog-for{
+	margin-bottom: 5px;
+}
+
+.edit-help-tag{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.edit-help-tag-for{
+	/* margin: 20px; */
+	/* height: 50px; */
+	width: 70px;
+	margin: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.edit-tag{
+	font-size: 12px;
+	background-color: rgba(92, 165, 224, 0.1);
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid rgb(35, 151, 240);
+	color: rgb(35, 151, 240);
+	width: 70px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition-property: width, height, background-color; /* 指定需要过渡的CSS属性 */
+  transition-duration: 0.5s;
+}
+
+.edit-tag-select{
+	background-color: rgb(92, 177, 241);
+	color: aliceblue;
+}
+
+/* .edit-label{
+	height: 30px;
+	width: 60px;
+} */
