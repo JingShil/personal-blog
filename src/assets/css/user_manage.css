@@ -42,10 +42,17 @@
 .user-manage-item{
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	/* justify-content: space-between; */
 	align-items: center;
 	width: 350px;
 	margin-bottom: 20px;
+}
+
+.user-manage-item-label{
+	width: 100px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
 }
 
 .user-manage-item span{

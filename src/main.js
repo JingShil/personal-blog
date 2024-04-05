@@ -6,7 +6,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import vuetyped from 'vue3typed'
-import naive from 'naive-ui'
+
 const app = createApp(App)
 
 // router.beforeEach((to, from, next) => {
@@ -20,7 +20,8 @@ const app = createApp(App)
 //     next();
 //   }
 // });
-app.use(naive).use(vuetyped).use(ElementPlus).use(store).use(router)
+app.use(ElementPlus)
+app.use(vuetyped).use(store).use(router)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }

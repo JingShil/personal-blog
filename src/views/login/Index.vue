@@ -1,5 +1,5 @@
 <template>
-	<div class="login-body" :style="'background-image: url(' + backgroundImg + ');'">
+	<div class="login-body" :style="'background-image:url(' + backgroundImg + ')'">
 		<div class="login-container">
 			<div class="login-left">
 				<h1>个人博客</h1>
@@ -9,7 +9,7 @@
 				</vuetyped>
 			</div>
 			<div class="login-right">
-				<span class="login-right-background" :style="'background-image: url(' + backgroundImg + ');'"></span>
+				<span class="login-right-background" :style="'background-image:url(' + backgroundImg + ')'"></span>
 
 				<div class="login"
 					:class="{
@@ -17,7 +17,6 @@
 					}"
 				>
 					<el-form
-						:ref="ruleForm"
 						style="width: 80%"
 						:model="ruleForm"
 						status-icon
@@ -30,11 +29,11 @@
 						</div>
 						<el-form-item prop="phone">
 							<span>手机号</span>
-							<el-input v-model.number="ruleForm.phone" autocomplete=“new-password” maxlength="11"/>
+							<el-input v-model.number="ruleForm.phone" maxlength="11"/>
 						</el-form-item>
 						<el-form-item prop="password" >
 							<span>密码</span>
-							<el-input v-model="ruleForm.password" type="password" autocomplete="off"  maxlength="12"/>
+							<el-input v-model="ruleForm.password" type="password"  maxlength="12"/>
 						</el-form-item>
 						<el-form-item prop="code">
 							<span>验证码</span>
@@ -56,7 +55,6 @@
 					}"
 				>
 				<el-form
-						:ref="ruleForm"
 						style="width: 80%"
 						:model="ruleForm"
 						status-icon
@@ -73,15 +71,15 @@
 						</el-form-item>
 						<el-form-item prop="name" >
 							<span>名称</span>
-							<el-input v-model="ruleForm.name" type="" autocomplete="off"  maxlength="10"/>
+							<el-input v-model="ruleForm.name" type=""  maxlength="10"/>
 						</el-form-item>
 						<el-form-item prop="password" >
 							<span>密码</span>
-							<el-input v-model="ruleForm.password" type="password" autocomplete="off"  maxlength="12"/>
+							<el-input v-model="ruleForm.password" type="password"  maxlength="12"/>
 						</el-form-item>
 						<el-form-item prop="checkPass" >
 							<span>确认密码</span>
-							<el-input v-model="ruleForm.checkPass" type="password" autocomplete="off"  maxlength="12"/>
+							<el-input v-model="ruleForm.checkPass" type="password"  maxlength="12"/>
 						</el-form-item>
 						<!-- <el-form-item prop="code">
 							<span>验证码</span>
@@ -190,7 +188,7 @@ const validatePass = (rule, value, callback) => {
   }
 };
 const validateCheckPass = (rule, value, callback) => {
-  if(!value || value != ruleForm.password){
+  if(!value || value != ruleForm.value.password){
     callback(new Error('与密码不一致'));
   }else{
     callback();
@@ -201,19 +199,19 @@ const validateCode = (rule, value, callback) => {
     callback(new Error('请输入验证码'));
   }else if(value < 1000){
     callback(new Error('请输入四位验证码'));
-    console.log(value)
+  
   }else{
     callback();
   }
 };
 
-const rules = {
+const rules = reactive({
 	phone: [{ validator: validatePhone, trigger: 'blur' }],
 	name: [{ validator: validateName, trigger: 'blur' }],
 	password: [{  validator: validatePass, trigger: 'blur' }],
 	checkPass: [{  validator: validateCheckPass, trigger: 'blur' }],
 	code: [{  validator: validateCode, trigger: 'blur' }]
-};
+});
    
                         
 

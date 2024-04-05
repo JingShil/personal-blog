@@ -18,18 +18,18 @@
 			</div>
 		</el-upload>
 		<div class="user-manage-item">
-			<span>姓名</span>
+			<span class="user-manage-item-label">姓名</span>
 			<el-input style="width: 260px" placeholder="请输入姓名" v-model="userInfo.name"/>
 		</div>
 		<div class="user-manage-item">
-			<span>性别</span>
-			<el-radio-group v-model="userInfo.sex">
+			<span class="user-manage-item-label">性别</span>
+			<el-radio-group v-model="userInfo.sex"  style="width: 260px">
 				<el-radio :value="1" size="large">男</el-radio>
 				<el-radio :value="2" size="large">女</el-radio>
 			</el-radio-group>
 		</div>
 		<div class="user-manage-item">
-			<span>生日</span>
+			<span class="user-manage-item-label">生日</span>
 			<el-date-picker
         v-model="userInfo.birthday"
         type="date"
@@ -40,11 +40,11 @@
       />
 		</div>
 		<div class="user-manage-item">
-			<span>所在地</span>
+			<span class="user-manage-item-label">所在地</span>
 			<el-input style="width: 260px" placeholder="请输入所在地" v-model="userInfo.location"/>
 		</div>
 		<div class="user-manage-item">
-			<span>毕业院校</span>
+			<span class="user-manage-item-label">毕业院校</span>
 			<el-input style="width: 260px" placeholder="请输入毕业院校" v-model="userInfo.college"/>
 		</div>
 		<!-- <div class="user-manage-item">
@@ -62,6 +62,9 @@
 import {ref,onMounted} from 'vue'
 import {save,download,getUserInfo} from '@/api/user'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { useRouter } from "vue-router";
+ 
+const router = useRouter();
 let showMessage=ref(false)
 let userInfo=ref(JSON.parse(localStorage.getItem("userInfo")));
 
@@ -69,9 +72,10 @@ let userInfo=ref(JSON.parse(localStorage.getItem("userInfo")));
 // let password = ref(null);
 let avatar=ref();
 //上传头像
-const headers = ref({ "Token":  localStorage.getItem("token") });
 
-const uploadImgUrl = ref("http://localhost:8081/user/upload/avatar");
+const headers = ref({ "Token":localStorage.getItem("token")});
+
+const uploadImgUrl = ref("http://43.129.171.44:8081/user/upload/avatar");
 
 const ImageData = ref()
 // 上传之前
@@ -149,7 +153,7 @@ function downloadAvatar(){
 function getUser(){
 	getUserInfo()
 	.then(res=>{
-		console.log(res.data)
+
 		localStorage.setItem("userInfo",JSON.stringify(res.data))
 		userInfo.value=res.data
 	})

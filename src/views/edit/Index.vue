@@ -98,7 +98,7 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 const route = useRoute();
 const vditor = ref()
 let catalogs = ref([])
-const uploadUrl = "http://localhost:8081/img/upload"
+const uploadUrl = "http://43.129.171.44:8081/img/upload"
 let menu = ref(0);
 let tags = ref([]);
 let articleTags = {};
@@ -149,7 +149,7 @@ onMounted(() => {
 
     input (value) {
       getCatalog();
-      console.log(value.length)
+      
     },
     after () {
       
@@ -372,7 +372,7 @@ function scrollTo (sectionId) {
 
   const element = document.getElementById(sectionId);
   if (element) {
-    console.log(sectionId)
+    
     element.scrollIntoView({ behavior: 'instant' });
   }
 }

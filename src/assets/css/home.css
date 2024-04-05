@@ -167,7 +167,14 @@
   flex-direction: row;
   margin-bottom: 40px;
   align-items: center;
+  justify-content: flex-start;
+  
+  /* flex-wrap: nowrap; */
 }
+
+/* .home-classify-item span{
+  width: 50px;
+} */
 
 .home-classify-for {
   max-width: 620px;
@@ -182,6 +189,7 @@
 }
 
 .home-classify-for-item{
+  margin-right: 20px;
   font-size: 12px;
 	/* background-color: rgba(92, 165, 224, 0.1); */
 	padding: 5px;
@@ -189,7 +197,7 @@
 	border: 1px solid rgb(35, 151, 240);
 	background-color: rgb(107, 156, 194);
 	color: rgb(249, 252, 255);
-	width: 70px;
+	min-width: 80px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;

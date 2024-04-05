@@ -21,13 +21,13 @@
 		<div class="blog-center">
 			<h1 class="blog-title">{{ article.title }}</h1>
 			<div id="vditor" class="blog-content"></div>
-			<div class="blog-comment">评论</div>
+			<!-- <div class="blog-comment">评论</div> -->
 		</div>
 		<div class="blog-right">
 			<div class="blog-user">
 				<div class="blog-user-basic">
-					<img src="@/assets/imgs/fufu.jpg" style="height: 50px;">
-					<span>作者</span>
+					<img :src="avatar" style="height: 50px;">
+					<span style="margin-top:10px">{{ adminInfo.name }}</span>
 				</div>
 				<div class="blog-user-link">
 					<div class="blog-user-link-item">
@@ -87,6 +87,7 @@ import 'vditor/dist/index.css';
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import {getArticleOne} from '@/api/article.js'
+import {getAdminUserInfo,download} from '@/api/user.js'
 // import VditorPreview from 'vditor/dist/method.min.js';
 // 2. 获取DOM引用
 const route = useRoute();
@@ -108,6 +109,15 @@ let article=ref({
   "createTime": null,
   "updateTime": null
 })
+let adminInfo=ref({
+	"name":null,
+	"birthday":null,
+	"avatar":null,
+	"sex":null,
+	"location":null,
+	"college":null
+});
+let avatar=ref()
 if(route.query.articleId != null){
   // console.log(route.query.article)
   articleId=route.query.articleId
@@ -116,10 +126,33 @@ if(route.query.articleId != null){
 // 3. 在组件初始化时，就创建Vditor对象，并引用
 onMounted(() => {
 	
-
+	getAdmin();
 	if(articleId != null)
 	getArticle()
 })
+
+function downloadAvatar(){
+	download(adminInfo.value.avatar)
+	.then(res=>{
+		// const blob = new Blob([res.data]);
+		const reader = new FileReader();
+		reader.readAsDataURL(res);
+		reader.onload = () => {
+			avatar.value = reader.result;
+		};
+		// avatar.value=res;
+	})
+}
+
+function getAdmin(){
+  
+  getAdminUserInfo()
+  .then(res=>{
+    adminInfo.value=res.data
+    // adminName=adminInfo.value.name
+    downloadAvatar()
+  })
+}
 
 
 // //获取所有tag

@@ -39,16 +39,31 @@ const routes = [
     name: '登陆',
     component: ()=>import('../views/login/Index.vue'),
   },
-  {
-    path: '/test',
-    name: '测试',
-    component: ()=>import('../views/test/Index.vue'),
-  },
+  // {
+  //   path: '/test',
+  //   name: 'test',
+  //   component: ()=>import('../views/test/Index.vue'),
+  // },
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.path === '/edit' || to.path === '/controller') {
+    
+    let token = localStorage.getItem('token');
+ 
+    if (token === null || token === '') {
+      next('/login');
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+});
 
 export default router

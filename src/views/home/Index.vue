@@ -1,5 +1,4 @@
 <template>
-  
   <div class="home-body">
     <div class="home-background" :style="'background-image: url(' + background_url + ');'"></div>
     <div class="home-exhibit">
@@ -33,26 +32,31 @@
           
 
           <div class="home-classify-item">
-            <span>标签</span>
+            <span style="width: 50px;">标签</span>
  
-            <div class="home-classify-for"
+            <div class="home-classify-for">
+              <div 
                   v-for="(tag, index) in tags"
                   :key="index">
-              <span class="home-classify-for-item"
-                    type="primary"
-                    :class="{ 'home-tag-select': isSelected(tag.id) }"
-                    @click="selectTag(tag.id)">{{ tag.name }}</span>
+                <span class="home-classify-for-item"
+                      type="primary"
+                      :class="{ 'home-tag-select': isSelected(tag.id) }"
+                      @click="selectTag(tag.id)">{{ tag.name }}</span>
+              </div>
             </div>
-
+            
           </div>
           <div class="home-classify-item">
-            <span>排序</span>
-            <div class="home-classify-for" v-for="(sort,index) in sorts" 
+            <span style="width: 50px;">排序</span>
+            <div class="home-classify-for">
+              <div  v-for="(sort,index) in sorts" 
                   :key="index">
-              <span class="home-classify-for-item" 
-              :class="{ 'home-tag-select': isSelectedOrder(sort.value) }"
-              @click="selectedOrder(sort.value)">{{ sort.name }}</span>
+                <span class="home-classify-for-item" 
+                :class="{ 'home-tag-select': isSelectedOrder(sort.value) }"
+                @click="selectedOrder(sort.value)">{{ sort.name }}</span>
+              </div>
             </div>
+            
             
           </div>
         </div>
@@ -105,13 +109,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeMount } from 'vue';
+import { ref, onMounted, onBeforeMount,defineComponent } from 'vue';
 import {getArticles} from "@/api/article.js";
 import { getTagList } from '@/api/tag.js';
 import {getAdminUserInfo,download} from '@/api/user.js'
 import Vditor from 'vditor';
 import MarkdownIt from 'markdown-it';
 import markdownItHeadingAnchor from 'markdown-it-headinganchor';
+// import { ElPagination } from 'element-plus'
+// components: {
+// 	ElPagination
+// }
 let labels=ref(['java', 'css', 'html', 'java', 'css', 'html', 'java', 'css', 'html', 'java', 'css', 'html', 'java', 'css', 'html',]);
 let sorts= ref([
   {
@@ -135,9 +143,10 @@ let exhibits= ref([
   {url:require("@/assets/imgs/7.jpg")},
   {url:require("@/assets/imgs/8.jpg")},
   {url:require("@/assets/imgs/9.jpg")},
+  {url:require('@/assets/imgs/fufubackground.jpg')}
 ]);
 let tags = ref([]); 
-let background_url = ref();
+let background_url = ref(require('@/assets/imgs/fufubackground.jpg'));
 let articleTag = ref();
 let blogs=ref([])
 let ordered=ref();
@@ -148,7 +157,7 @@ let articleListElement={
 	"tagId":null,
 	"title":null,
 	"published":null,
-	"order":null,
+	"order":1,
 }
 const adminInfo=ref()
 let avatar=ref()
@@ -174,7 +183,7 @@ function downloadAvatar(){
 }
 
 function getAdmin(){
-  console.log("nihao")
+
   getAdminUserInfo()
   .then(res=>{
     adminInfo.value=res.data
@@ -256,7 +265,7 @@ function getList(){
 	getArticles(articleListElement)
 	.then(res=>{
 		blogs.value=res.data;
-    console.log(res.data)
+
     
     
 	})

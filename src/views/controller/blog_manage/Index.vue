@@ -115,6 +115,9 @@ function getList(){
 	.then(res=>{
 		blogs.value=res.data;
 	})
+	.catch(error=>{
+		
+	})
 }
 
 function deleteA(articleId){

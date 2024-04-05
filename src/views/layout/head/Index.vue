@@ -18,24 +18,71 @@
 			>
 				<div>站长介绍</div>
 			</router-link> 
-			<router-link to="/edit" style="text-decoration: none;color: inherit;" class="head-menu-item"
+			<router-link v-if="token" to="/edit" style="text-decoration: none;color: inherit;" class="head-menu-item" 
 			>
 				<div>新建</div>
 			</router-link>
-			<router-link to="/controller" style="text-decoration: none;
-					color: inherit;" class="head-menu-item"
+			<div v-else style="text-decoration: none;color: inherit;" class="head-menu-item">
+					<div class="head-menu-item-forbid">新建</div>
+			</div>
+			<router-link v-if="token" to="/controller" style="text-decoration: none;
+					color: inherit;" class="head-menu-item" 
 			>
 				<div>控制台</div>
 			</router-link> 
+			<div v-else style="text-decoration: none;color: inherit;" class="head-menu-item">
+					<div class="head-menu-item-forbid">控制台</div>
+			</div>
 			<!-- <div class="head-menu-item">链接</div>
 			<div class="head-menu-item">说明</div> -->
 		</div>
-		<!-- <div class="head-search">
-			<el-input style="width: 250px" placeholder="请输入"/>
-			<el-button type="primary"><el-icon><Search /></el-icon></el-button>
-		</div> -->
+		<div v-if="token" class="head-exit" @click="exit">
+			<img src="@/assets/imgs/退出.svg">
+			<span>退出登录</span>
+		</div>
+		<div v-else class="head-login" @click="login">
+			<img src="@/assets/imgs/登陆.svg">
+			<span>登录</span>
+		</div>
 	</div>
 </template>
+
+<script setup>
+import {ref} from "vue"
+import { useRouter } from "vue-router";
+import { ElMessage, ElMessageBox } from 'element-plus'
+const router = useRouter();
+const token = ref(localStorage.getItem("token"));
+
+//登陆
+function login(){
+	router.push(({ path: "/login" }));
+}
+
+function exit(){
+	ElMessageBox.confirm(
+    '确定退出吗？',
+    'Warning',
+    {
+      confirmButtonText: '确认',
+      cancelButtonText: '取消',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+			localStorage.removeItem("token");
+			localStorage.removeItem("userInfo");
+     	location.reload();
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '取消',
+      })
+    })
+}
+</script>
+
 
 <style src="../../../assets/css/head.css" scoped>
 

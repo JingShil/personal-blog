@@ -118,7 +118,7 @@ function downloadAvatar(){
 }
 
 function getAdmin(){
-  console.log("nihao")
+  
   getAdminUserInfo()
   .then(res=>{
     adminInfo.value=res.data
