@@ -5,14 +5,15 @@
 				<div class="blog-catalog-head">
 					<img src="@/assets/imgs/目录2.svg">
 					<h1>目录</h1>
+					<div class="blog-catalog-progress">{{ progress }}</div>
 				</div>
 				<div class="blog-catalog-main">
 					<div class="blog-catalog-for"
 								v-for="(catalog, index) in catalogs"
 								:key="index">
-						<span
-									:style="{ marginLeft: catalog.level * 20 + 'px'}"
-									@click="scrollTo(catalog.id)">{{ catalog.title }}</span>
+						<div class="blog-catalog-margin" :style="{ marginLeft: catalog.level * 15 + 'px'}"></div>
+						<div class="blog-catalog-line"></div>
+						<span @click="scrollTo(catalog.id)" :style="{backgroundImage:catalog.color}" style="transition: 0.3s;">{{ catalog.title }}</span>
 
 					</div>
 				</div>
@@ -20,13 +21,13 @@
 		</div>
 		<div class="blog-center">
 			<h1 class="blog-title">{{ article.title }}</h1>
-			<div id="vditor" class="blog-content"></div>
-			<!-- <div class="blog-comment">评论</div> -->
+			<div id="vditor" class="blog-content" ></div>
+			<div class="blog-comment"><Comment></Comment></div>
 		</div>
 		<div class="blog-right">
 			<div class="blog-user">
 				<div class="blog-user-basic">
-					<img :src="avatar" style="height: 50px;">
+					<img v-if="authorInfo!=null" :src="imgDownload+authorInfo.avatar" style="height: 50px;">
 					<span style="margin-top:10px">{{ adminInfo.name }}</span>
 				</div>
 				<div class="blog-user-link">
@@ -84,14 +85,18 @@
 import Vditor from 'vditor'
 // 1.2 引入样式
 import 'vditor/dist/index.css';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted,onBeforeUnmount,inject } from 'vue';
 import { useRoute } from 'vue-router';
 import {getArticleOne} from '@/api/article.js'
-import {getAdminUserInfo,download} from '@/api/user.js'
+import {getAdminUserInfo,download,getArticleUserInfo} from '@/api/user.js'
+import Comment from '../comment/Index.vue'
 // import VditorPreview from 'vditor/dist/method.min.js';
 // 2. 获取DOM引用
 const route = useRoute();
-const vditor = ref()
+const progress = ref(0);
+const vditor = ref();
+const imgDownload = inject('globalImgDownload');
+
 let articleId=null;
 let articleTagList = ref([]);
 let catalogs = ref([])
@@ -117,7 +122,9 @@ let adminInfo=ref({
 	"location":null,
 	"college":null
 });
+let authorInfo=ref(null)
 let avatar=ref()
+let isLogin=ref(false);
 if(route.query.articleId != null){
   // console.log(route.query.article)
   articleId=route.query.articleId
@@ -129,7 +136,32 @@ onMounted(() => {
 	getAdmin();
 	if(articleId != null)
 	getArticle()
+	window.addEventListener("scroll", handleScroll,true);
+	
+
 })
+onBeforeUnmount(()=>{
+	window.removeEventListener("scroll", handleScroll);
+})
+
+function handleScroll() {
+  let catalog = catalogs.value;
+	let i=catalogs.value.length-1;
+	let flag=0;
+	for(i;i>=0;i--){
+		if(catalog[i].scrollTop<=window.scrollY && flag==0){
+			progress.value=parseInt(
+									(window.scrollY / document.documentElement.scrollHeight) *
+											100
+							) + "%";
+			flag=1;
+			catalog[i].color="linear-gradient(to top,#f1214e,#6989e0,#43c6ee,#7ff121)";
+		}else{
+			catalog[i].color="linear-gradient(to right, #0e0d0d, #020202)";
+		}
+	}
+}
+
 
 function downloadAvatar(){
 	download(adminInfo.value.avatar)
@@ -150,8 +182,16 @@ function getAdmin(){
   .then(res=>{
     adminInfo.value=res.data
     // adminName=adminInfo.value.name
-    downloadAvatar()
+    // downloadAvatar()
   })
+}
+
+function getArticleUser(){
+
+	getArticleUserInfo(article.value.userId)
+		.then(res=>{
+			authorInfo.value=res.data;
+		})
 }
 
 
@@ -182,6 +222,7 @@ function getArticle(){
 					getCatalog();
 				}
 			});
+			getArticleUser();
 			
      
     })
@@ -215,13 +256,17 @@ function getCatalog () {
         id: id,
         title: e.innerHTML,
         level: now,
-        nodeName: e.nodeName
+        nodeName: e.nodeName,
+				scrollTop: e.offsetTop,
+				color:"linear-gradient(to right, #0e0d0d, #020202)"
       });
     }
   });
 	catalogs.value=titles;
 	
+	
 }
+
 //点击目录，自动追寻文章相应位置
 function scrollTo (sectionId) {
 

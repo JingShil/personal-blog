@@ -53,14 +53,14 @@ service.interceptors.response.use(
     return response.data;
   },
   error => {
-    ElMessageBox.alert('网络错误，请重新登陆', '', {
-      // if you want to disable its autofocus
-      // autofocus: false,
-      confirmButtonText: '确认',
-      callback: (action) => {
-        router.push('/login');
-      },
-    })
+    // ElMessageBox.alert('网络错误，请重新登陆', '', {
+    //   // if you want to disable its autofocus
+    //   // autofocus: false,
+    //   confirmButtonText: '确认',
+    //   callback: (action) => {
+    //     router.push('/login');
+    //   },
+    // })
     // 处理响应错误
     // console.log(error)
     // if (error.response && error.response.status === 401) {

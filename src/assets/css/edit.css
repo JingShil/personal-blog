@@ -138,7 +138,7 @@
 	width: 100%;
 	flex: 1;
 	border-top: 1px solid rgb(183, 214, 238);
-	
+	/* overflow-y: auto; */
 }
 
 .edit-help-content-item{
@@ -163,11 +163,42 @@
 .edit-help-catalog{
 	flex: 1;
 	margin-top: 10px;
+	
 }
 .edit-help-catalog-for{
 	margin-bottom: 5px;
+	display: flex;
+	flex-direction: row;
+	height: 25px;
+	overflow: hidden;
+	width: 300px;
 }
+.blog-catalog-line{
+	height: 20px;
+	width: 15px;
+	/* background-color: antiquewhite; */
+	border-left: 2px solid rgb(230, 27, 138);
+	/* border-bottom: 2px solid rgb(221, 62, 115); */
+}
+.edit-help-catalog-for span{
+	/* overflow: hidden; */
+	cursor: pointer;
+	display: flex;
+	flex-direction: row;
+	width: 180px;
+	overflow: hidden;
+	height: 20px;
+	/* text-align: left; */
+	white-space: nowrap; /* 不换行 */
+  overflow-x: auto; /* 超出部分隐藏 */
 
+}
+.edit-help-catalog-for span::-webkit-scrollbar {
+  display: none;
+}
+.edit-help-catalog-for span:hover{
+	color: rgb(241, 30, 146);
+}
 .edit-help-tag{
 	width: 100%;
 	display: flex;

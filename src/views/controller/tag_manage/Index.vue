@@ -23,7 +23,7 @@
 
 <script setup>
 import {onMounted, ref} from 'vue'
-import { getTagList,deleteTag,save } from '@/api/tag.js';
+import { getTagListPrivate,deleteTag,save } from '@/api/tag.js';
 import { ElMessage, ElMessageBox } from 'element-plus'
 let tags = ref([]); 
 let newTitle=null;
@@ -33,7 +33,7 @@ onMounted(()=>{
 })
 //获取所有tag
 function getTags () {
-  getTagList()
+  getTagListPrivate()
     .then(res => {
       tags.value = res.data;
       
@@ -119,7 +119,7 @@ function handlePublished(newPublished){
 
 function handleSearch() {
 	name=newTitle;
-	getTagList(name)
+	getTagListPrivate(name)
 	.then(res=>{
 		tags.value=res.data
 	})

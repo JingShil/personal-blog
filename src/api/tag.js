@@ -10,6 +10,16 @@ export function getTagList(name){
 	})
 }
 
+export function getTagListPrivate(name){
+	return request({
+		url:'/tag/list/private',
+		method:'get',
+		params:{
+			name
+		}
+	})
+}
+
 export function save(tag){
 	return request({
 		url:'/tag/save',

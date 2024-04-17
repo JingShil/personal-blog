@@ -1,18 +1,6 @@
 <template>
   <div class="home-body">
-    <div class="home-background" :style="'background-image: url(' + background_url + ');'"></div>
-    <div class="home-exhibit">
-      <el-carousel :interval="4000"
-                   type="card"
-                   height="200px"  indicator-position="none">
-        <el-carousel-item v-for="item in exhibits"
-                          :key="item">
-              <img :src="item.url" style="background-size: cover;height: 200px;width: fit-content;" @click="setBackground_url(item.url)">
-              
-              <!-- <el-image style="width: 100px; height: 100px" :src="'../../assets/imgs/' + item + '.png'"/> -->
-        </el-carousel-item>
-      </el-carousel>
-    </div>
+
 
     <div class="home-line">
       <div class="home-line-content">
@@ -76,12 +64,12 @@
                       v-html="parseMarkdown(blog.content)"></span>
                     </div>
                 </div>
-                <div class="home-content-item-bottom">
+                <!-- <div class="home-content-item-bottom">
                   <img class="home-content-item-avatar"
                        src="../../assets/imgs/fufu.jpg">
                   <div class="home-content-item-author">op</div>
                   <div class="home-content-item-time">今天</div>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -96,7 +84,7 @@
 
       <div class="home-user">
         <div class="home-user-cover"></div>
-        <img :src="avatar" class="home-user-avatar">
+        <img v-if="adminInfo!=null" :src="imgDownload + adminInfo.avatar" class="home-user-avatar">
         <h1 class="home-user-name">{{ adminName }}</h1>
         <span class="home-user-name-lite">欢迎来到我的博客</span>
         <!-- <div class="home-user-link">
@@ -109,13 +97,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeMount,defineComponent } from 'vue';
+import { ref, onMounted, onBeforeMount,defineComponent,inject } from 'vue';
 import {getArticles} from "@/api/article.js";
 import { getTagList } from '@/api/tag.js';
 import {getAdminUserInfo,download} from '@/api/user.js'
 import Vditor from 'vditor';
 import MarkdownIt from 'markdown-it';
 import markdownItHeadingAnchor from 'markdown-it-headinganchor';
+
 // import { ElPagination } from 'element-plus'
 // components: {
 // 	ElPagination
@@ -132,21 +121,9 @@ let sorts= ref([
   }
 
 ]);
-let exhibits= ref([
-  {url:require("@/assets/imgs/1.png")},
-  {url:require("@/assets/imgs/2.png")},
-  {url:require("@/assets/imgs/3.png")},
-  {url:require("@/assets/imgs/2.jpg")},
-  {url:require("@/assets/imgs/3.jpg")},
-  {url:require("@/assets/imgs/4.jpg")},
-  {url:require("@/assets/imgs/5.jpg")},
-  {url:require("@/assets/imgs/7.jpg")},
-  {url:require("@/assets/imgs/8.jpg")},
-  {url:require("@/assets/imgs/9.jpg")},
-  {url:require('@/assets/imgs/fufubackground.jpg')}
-]);
+const imgDownload = inject('globalImgDownload');
 let tags = ref([]); 
-let background_url = ref(require('@/assets/imgs/fufubackground.jpg'));
+
 let articleTag = ref();
 let blogs=ref([])
 let ordered=ref();
@@ -169,18 +146,7 @@ onMounted(()=>{
   
 })
 
-function downloadAvatar(){
-	download(adminInfo.value.avatar)
-	.then(res=>{
-		// const blob = new Blob([res.data]);
-		const reader = new FileReader();
-		reader.readAsDataURL(res);
-		reader.onload = () => {
-			avatar.value = reader.result;
-		};
-		// avatar.value=res;
-	})
-}
+
 
 function getAdmin(){
 
@@ -188,7 +154,7 @@ function getAdmin(){
   .then(res=>{
     adminInfo.value=res.data
     adminName=adminInfo.value.name
-    downloadAvatar()
+    // downloadAvatar()
   })
 }
 

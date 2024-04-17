@@ -11,7 +11,7 @@
 			:before-upload="beforeAvatarUpload"
 			@mouseover="showMessage = true" @mouseleave="showMessage = false"
 		>
-			<img v-if="avatar" :src="avatar" class="user-manage-avatar" />
+			<img v-if="userInfo.avatar != null" :src="imgDownload + userInfo.avatar" class="user-manage-avatar" />
 			<img v-else src="@/assets/imgs/fufu.jpg" class="user-manage-avatar" />
 			<div class="user-manage-avatar-cover" v-if="showMessage">
 				<img src="@/assets/imgs/controller/头像上传.svg" style="height: 40px;color: rgb(253, 253, 253);" />
@@ -59,7 +59,7 @@
 </template>
 
 <script setup>
-import {ref,onMounted} from 'vue'
+import {ref,onMounted,inject} from 'vue'
 import {save,download,getUserInfo} from '@/api/user'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useRouter } from "vue-router";
@@ -67,7 +67,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 let showMessage=ref(false)
 let userInfo=ref(JSON.parse(localStorage.getItem("userInfo")));
-
+const imgDownload = inject('globalImgDownload');
 
 // let password = ref(null);
 let avatar=ref();
@@ -82,7 +82,7 @@ const ImageData = ref()
 onMounted(()=>{
 	// userInfo.value.avatar=require(userInfo.value.avatar);
 	// getImageUrl();
-	downloadAvatar();
+	// downloadAvatar();
 })
 
 const beforeAvatarUpload = (rawFile) => {

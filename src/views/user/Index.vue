@@ -1,7 +1,7 @@
 <template>
 	<div class="user-body">
 		<div class="user-basic">
-			<img :src="avatar" class="user-avatar">
+			<img :src="imgDownload + adminInfo.avatar" class="user-avatar">
 			<span class="user-name">{{ adminInfo.name }}</span>
 			<div class="user-link">
 				<div class="user-link-item">
@@ -43,12 +43,13 @@
 <script setup>
 import {getAdminUserInfo,download} from '@/api/user.js'
 
-import {ref, onMounted} from 'vue'
+import {ref, onMounted,inject} from 'vue'
 import Vditor from 'vditor'
 // 1.2 引入样式
 import 'vditor/dist/index.css';
 import { useRoute } from 'vue-router';
 import {getArticleOne} from '@/api/article.js'
+const imgDownload = inject('globalImgDownload');
 let managed=ref(false);
 const vditor = ref()
 let articleId=1;
@@ -123,7 +124,7 @@ function getAdmin(){
   .then(res=>{
     adminInfo.value=res.data
     // adminName=adminInfo.value.name
-    downloadAvatar()
+    // downloadAvatar()
   })
 }
 

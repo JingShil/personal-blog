@@ -1,0 +1,165 @@
+.comment-body{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.comment-head{
+	width: 90%;
+	height: 180px;
+	display: flex;
+	flex-direction: row;
+
+	/* background-color: aqua; */
+	
+}
+
+.comment-input{
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	padding:10px;
+	position: relative;
+}
+
+.comment-input textarea{
+	resize: none;
+	flex: 1;
+	height: 100%;
+	padding:10px;
+	font-size: 20px;
+	border: none;
+	border: 2px solid rgb(141, 221, 245);
+	background-color: rgb(240, 244, 248);
+	border-radius: 10px;
+}
+
+.comment-input textarea:focus{
+	outline: none;
+}
+
+.comment-input-button{
+	height: 20px;
+	background-color: rgb(51, 165, 241);
+	padding:10px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-left: 10px;
+	border-radius: 10px;
+	color: rgb(244, 245, 247);
+	cursor: pointer;
+}
+
+.comment-input-button:active{
+	transform: translateY(1px);
+}
+
+
+.comment-main{
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+}
+
+.comment-for{
+	min-height: 80px;
+	/* background-color: antiquewhite; */
+	margin-top: 10px;
+	border-bottom: 2px solid rgb(159, 221, 240);
+	padding: 10px;
+}
+
+.comment{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.comment-content{
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.comment-content-right{
+	margin-left: 20px;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	position: relative;
+}
+
+.comment-user-name{
+	font-size: 23px;
+	
+}
+
+.comment-time{
+	color: rgb(165, 167, 168);
+}
+
+.comment-text{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+.comment-text div span{
+	color: rgb(99, 102, 105);
+	font-size: 14px;
+	padding:2px;
+}
+
+.comment-user-avatar{
+	height: 50px;
+	border-radius: 30px;
+}
+
+.comment-info{
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: flex;
+	flex-direction: row;
+
+}
+
+.comment-info-item{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-right: 20px;
+	font-size: 15px;
+	cursor: pointer;
+	
+}
+
+.comment-info-item span{
+	
+}
+
+.comment-info img{
+	height: 15px;
+	margin-left: 5px;
+	margin-right: 5px;
+	
+}
+
+.comment-item-for{
+	min-height: 80px;
+	/* background-color: antiquewhite; */
+	margin-top: 10px;
+	width: 90%;
+	padding: 10px;
+	background-color: rgb(211, 214, 216);
+	border-radius: 10px;
+}

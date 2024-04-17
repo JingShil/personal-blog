@@ -22,6 +22,9 @@ const app = createApp(App)
 // });
 app.use(ElementPlus)
 app.use(vuetyped).use(store).use(router)
+const globalImgDownload = 'http://43.129.171.44:8081/img/download?fileName='
+app.provide('globalImgDownload',globalImgDownload)
+app.config.globalProperties.$globalImgDownload = globalImgDownload;
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }

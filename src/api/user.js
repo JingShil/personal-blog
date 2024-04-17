@@ -48,3 +48,13 @@ export function getAdminUserInfo(){
 		method:'get'
 	})
 }
+
+export function getArticleUserInfo(articleId){
+	return request({
+		url:'/user/article/info',
+		method:'get',
+		params:{
+			articleId
+		}
+	})
+}

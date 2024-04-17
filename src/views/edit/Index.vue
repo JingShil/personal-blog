@@ -51,9 +51,12 @@
               <div class="edit-help-catalog-for"
                    v-for="(catalog, index) in catalogs"
                    :key="index">
-                <span :id="catalog.id"
+                <div class="blog-catalog-margin" :style="{ marginLeft: catalog.level * 15 + 'px'}"></div>
+                <div class="blog-catalog-line"></div>
+                <span @click="scrollTo(catalog.id)" :style="{color:catalog.color}" style="transition: 0.3s;">{{ catalog.title }}</span>
+                <!-- <span :id="catalog.id"
                       :style="{ marginLeft: catalog.level * 20 + 'px'}"
-                      @click="scrollTo(catalog.id)">{{ catalog.title }}</span>
+                      @click="scrollTo(catalog.id)">{{ catalog.title }}</span> -->
 
               </div>
             </div>
@@ -89,7 +92,7 @@
 import Vditor from 'vditor'
 // 1.2 引入样式
 import 'vditor/dist/index.css';
-import { ref, onMounted, onBeforeMount } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { getTagList } from '@/api/tag.js';
 import { save } from '@/api/article.js'
 import {getArticleOne} from '@/api/article.js'
@@ -157,7 +160,7 @@ onMounted(() => {
       
       vditor.value.setValue("");
       getArticle();
-      autosave();
+      // autosave();
       
     },
     upload:{
@@ -173,12 +176,18 @@ onMounted(() => {
 
   })
   getTags();
+
   
 })
 
-onBeforeMount(() => {
-  clearInterval(timer.value); // 在组件销毁前清除定时器
-});
+
+
+
+// onBeforeMount(() => {
+//   clearInterval(timer.value); // 在组件销毁前清除定时器
+// });
+
+
 //设置help
 function setMenu(index){
   menu.value=index;
@@ -296,6 +305,7 @@ function getTags () {
     })
 }
 
+
 //生成目录
 function getCatalog () {
   //给标题附上id
@@ -325,7 +335,12 @@ function getCatalog () {
     // console.log(article_content2.childNodes[index]);
     if (titleTag.includes(e.nodeName)) {
       const id = model + "-" + index;
-      ids.push(id)
+      ids.push(
+        {
+          id: id,
+          scrollTop: e.offsetTop
+        }
+      )
 
       article_content2.childNodes[index].id = id
     }
@@ -344,7 +359,7 @@ function getCatalog () {
   let num = 0;
   childNodesArray.forEach((e, index) => {
     if (titleTag.includes(e.nodeName)) {
-      const id = ids[num++];
+      const id = ids[num].id;
       now = Number(e.nodeName.substring(1, 2));
       // if (pre > now) {
       //   count=pre-now;
@@ -357,16 +372,49 @@ function getCatalog () {
         id: id,
         title: e.innerHTML,
         level: now,
-        nodeName: e.nodeName
+        nodeName: e.nodeName,
+				scrollTop: ids[num++].scrollTop,
+				color:"black"
       });
     }
   });
-
-  catalogs.value = titles;
-
+	catalogs.value=titles;
+  // vditor-reset
+  const elements = Array.from(document.getElementsByClassName("vditor-reset"));
+  elements.forEach(element => {
+    element.addEventListener("scroll", function () {
+      let catalog = catalogs.value;
+      let i=catalogs.value.length-1;
+      let flag=0;
+      // console.log(element.scrollTop)
+      for(i;i>=0;i--){
+        if(catalog[i].scrollTop<=element.scrollTop && flag==0){
+          flag=1;
+          catalog[i].color="rgb(241, 30, 146)";
+        }else{
+          catalog[i].color="black";
+        }
+      }
+    },true);
+  });
+	// element.addEventListener("scroll", function () {
+  //   // 
+	// 	let catalog = catalogs.value;
+	// 	let i=catalogs.value.length-1;
+	// 	let flag=0;
+	// 	for(i;i>=0;i--){
+	// 		if(catalog[i].scrollTop<=window.scrollY && flag==0){
+	// 			flag=1;
+	// 			catalog[i].color="rgb(241, 30, 146)";
+	// 		}else{
+	// 			catalog[i].color="black";
+	// 		}
+	// 	}
+	// },true);
 
 
 }
+
 //点击目录，自动追寻文章相应位置
 function scrollTo (sectionId) {
 
