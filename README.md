@@ -1,19 +1,19 @@
-# blog-front
+# 个人博客前端
 
-## Project setup
+## 安装
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 运行
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 打包部署
 ```
 npm run build
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 项目链接
+See [Configuration Reference](http://furinafontaine.love/#/).
