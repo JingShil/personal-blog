@@ -16,4 +16,4 @@ npm run build
 ```
 
 ### 项目链接
-See [Configuration Reference](http://furinafontaine.love/#/).
+[小何的博客](http://furinafontaine.love/#/).
